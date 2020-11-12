@@ -1,0 +1,27 @@
+$blanco: #fff;
+$negro : #000;
+$azul: #0575E6;
+$gris: rgb(240, 240, 240);
+$verde: #00F260;
+$dark: #252525;
+$rosa : #df8a8a;
+
+$IBM: 'IBM Plex Sans', sans-serif;
+$Poppins: 'Poppins', sans-serif;
+$Raleway: 'Raleway', sans-serif;
+
+.categoria {
+    display: flex;
+    flex-direction: column;
+    background: $rosa;
+    font-family: $Poppins; 
+    display: flex;
+    align-items: center;
+    border: 1px solid $dark;
+    margin-bottom: 20px;
+    h3{
+        color: $blanco;
+        font-size: 20px;
+        font-family: $Poppins;
+    }
+}

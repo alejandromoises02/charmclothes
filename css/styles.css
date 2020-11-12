@@ -1,0 +1,24 @@
+.categoria {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #df8a8a;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #252525;
+  margin-bottom: 20px;
+}
+
+.categoria h3 {
+  color: #fff;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+}
+/*# sourceMappingURL=styles.css.map */
