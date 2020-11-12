@@ -1,81 +1,53 @@
-function productos(id, nombre, precio, categoria, color, talla){
-   this.id = id;
-   this.nombre = nombre;
-   this.precio = precio;
-   this.categoria = categoria;
-   this.color = color;
-   this.talla = talla;
-    
-}
+////////////////////DECLARACION DE VARIABLES////////////////////
+let data =[];
+let cate;
 
+////////////////////DECLARACION DE VARIABLES GENERICAS////////////////////
 function borrarElemento(){
     let borrarElemento = $("#productos div");
     borrarElemento.remove();
  }
 
-var data =[];
-var cate;
+function crearTag(tag, clase, padre){
+    let salida = document.createElement(tag)
+    salida.className = clase;
+    $(padre).append(salida);
+}
 
+function crearElemento(tag, contenido, padre){
+    let salida = document.createElement(tag);
+    salida.textContent = contenido;
+    $(padre).append(salida);
+}
+
+////////////////////RENDER PRODUCTOS POR CATEGORIA////////////////////
 function callbackJSON(resp, state){
     borrarElemento();
     data =[];
     if(state === "success"){
         for (const i of resp) {
-            data.push(i);
+            data.push(i);//Se guarda en data todo el jason
         }
-    
-        console.log(data);
-        cate = $('input:radio[name=cat]:checked').val();
-        console.log(cate);
-        var salida;
-
-       
+        cate = $('input:radio[name=cat]:checked').val();//Se toma la categoria seleccionada
         data.forEach(item => {
-
-            if(cate===item.categoria){
-            
-                let salida = document.createElement("div")
-                salida.className = 'vista';
-                $("#productos").append(salida);
-                console.log("se creo elemento div");
-
-
-                salida = document.createElement("p");
-                salida.textContent = item.nombre;
-                $(".vista:last-child").append(salida);
-
-                salida = document.createElement("p");
-                salida.textContent = item.precio;
-                $(".vista:last-child").append(salida);
-
-
-                salida = document.createElement("div")
-                salida.className = 'color';
-                $("div.vista:last-child").append(salida);
-
+            if(cate===item.categoria){//Si el producto coincide en la categoria seleccionada se renderiza
+                crearTag("div", 'vista', "#productos");//Se crea un div para la tarjeta del producto
+                crearElemento("p", item.nombre, ".vista:last-child");//nombre
+                crearElemento("p", item.precio, ".vista:last-child");//precio
+                crearTag("div", 'color', "div.vista:last-child");//se crea un div para la selccion de color
                 item.Color.forEach(element => {
-                    salida = document.createElement("p");
-                    salida.textContent= element;
-                    $(".vista:last-child div.color").append(salida);
-                });
-
-                salida = document.createElement("div")
-                salida.className = 'talla';
-                $("div.vista:last-child").append(salida);
-
+                    crearElemento("p", element, ".vista:last-child div.color")});//color
+                crearTag("div", 'talla', "div.vista:last-child");//se crea un div para la selccion de talla
                 item.Talla.forEach(element => {
-                    salida = document.createElement("p");
-                    salida.textContent= element;
-                    $(".vista:last-child div.talla").append(salida);
-                });
-
+                    crearElemento("p", element, ".vista:last-child div.talla")});//talla
             }
         })
 }
 }
 
+////////////////////RENDER PRODUCTOS POR CATEGORIA Y JASON(AJAX)////////////////////
 $("#listaProductos").click(function(){
-    $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})
+    $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json
  })
 
 
