@@ -18,10 +18,28 @@ $Raleway: 'Raleway', sans-serif;
     display: flex;
     align-items: center;
     border: 1px solid $dark;
-    margin-bottom: 20px;
-    h3{
-        color: $blanco;
-        font-size: 20px;
-        font-family: $Poppins;
-    }
+}
+
+#productos{
+    display: flex;
+    flex-wrap: wrap;
+    //flex-direction: row;
+    .vista{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: solid $gris 1px;
+        border-radius: 5px;
+        width: 250px;
+        height: 300px;
+        margin-bottom: 20px;;
+        margin-right: 20px;
+        p{
+          color: black;
+          font-family: $IBM;
+          display: inline-block;
+          line-height: 1.6;
+          text-align: center;
+      }
+      }
 }

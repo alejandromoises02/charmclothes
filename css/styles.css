@@ -13,12 +13,40 @@
       -ms-flex-align: center;
           align-items: center;
   border: 1px solid #252525;
-  margin-bottom: 20px;
 }
 
-.categoria h3 {
-  color: #fff;
-  font-size: 20px;
-  font-family: "Poppins", sans-serif;
+#productos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#productos .vista {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: solid #f0f0f0 1px;
+  border-radius: 5px;
+  width: 250px;
+  height: 300px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+#productos .vista p {
+  color: black;
+  font-family: "IBM Plex Sans", sans-serif;
+  display: inline-block;
+  line-height: 1.6;
+  text-align: center;
 }
 /*# sourceMappingURL=styles.css.map */

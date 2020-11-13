@@ -34,10 +34,10 @@ function callbackJSON(resp, state){
                 crearTag("div", 'vista', "#productos");//Se crea un div para la tarjeta del producto
                 crearElemento("p", item.nombre, ".vista:last-child");//nombre
                 crearElemento("p", item.precio, ".vista:last-child");//precio
-                crearTag("div", 'color', "div.vista:last-child");//se crea un div para la selccion de color
+                crearTag("div", 'color', "div.vista:last-child");//se crea un div para la seleccion de color
                 item.Color.forEach(element => {
                     crearElemento("p", element, ".vista:last-child div.color")});//color
-                crearTag("div", 'talla', "div.vista:last-child");//se crea un div para la selccion de talla
+                crearTag("div", 'talla', "div.vista:last-child");//se crea un div para la seleccion de talla
                 item.Talla.forEach(element => {
                     crearElemento("p", element, ".vista:last-child div.talla")});//talla
             }
