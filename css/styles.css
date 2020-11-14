@@ -37,7 +37,7 @@
   border: solid #f0f0f0 1px;
   border-radius: 5px;
   width: 250px;
-  height: 300px;
+  height: 600px;
   margin-bottom: 20px;
   margin-right: 20px;
 }
@@ -48,5 +48,37 @@
   display: inline-block;
   line-height: 1.6;
   text-align: center;
+}
+
+#productos .vista select {
+  margin-bottom: 10px;
+}
+
+#productos .vista .containerColorTalla, #productos .vista .containerColor, #productos .vista .containerTalla, #productos .vista .containerCntd {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#productos .vista .containerColorTalla p, #productos .vista .containerColor p, #productos .vista .containerTalla p, #productos .vista .containerCntd p {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.responsiva {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 /*# sourceMappingURL=styles.css.map */
