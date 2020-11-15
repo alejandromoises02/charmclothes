@@ -4,21 +4,36 @@ $azul: #0575E6;
 $gris: rgb(240, 240, 240);
 $verde: #00F260;
 $dark: #252525;
-$rosa : #df8a8a;
+$base : rgb(86, 83, 246);
 
 $IBM: 'IBM Plex Sans', sans-serif;
 $Poppins: 'Poppins', sans-serif;
 $Raleway: 'Raleway', sans-serif;
+$Caveat: 'Caveat', cursive;
 
 .categoria {
     display: flex;
     flex-direction: column;
-    background: $rosa;
-    font-family: $Poppins; 
+    background: rgba(86, 83, 246, 0.6);
+    font-family: $Caveat; 
     display: flex;
     align-items: center;
     border: 1px solid $dark;
+    color: $blanco;
+    label{
+        font-size: 25px;
+    }
 }
+
+.barra{
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
 
 #productos{
     display: flex;
@@ -29,17 +44,26 @@ $Raleway: 'Raleway', sans-serif;
         flex-direction: column;
         align-items: center;
         border: solid $gris 1px;
+        background-color: rgba(86, 83, 246, 0.3);
         border-radius: 5px;
         width: 250px;
-        height: 600px;
+        height: 650px;
         margin-bottom: 20px;;
         margin-right: 20px;
+        h2{
+            font-size: 38px;
+            color: black;
+            font-family: $Caveat;
+        }
+        
         p{
-          color: black;
-          font-family: $IBM;
-          display: inline-block;
-          line-height: 1.6;
-          text-align: center;
+            /*font-weight: bold;*/
+            color: black;
+            font-family: $Caveat;
+            display: inline-block;
+            line-height: 1.6;
+            text-align: center;
+            font-size: 25px;
       }
       select{
           margin-bottom: 10px;
@@ -71,4 +95,18 @@ $Raleway: 'Raleway', sans-serif;
     width: 100%;
     display: block;
     margin: 0 auto;
+}
+
+.elementoCarrito{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    p{
+        padding: 5px;
+    }
+}
+
+body{
+    background-image: url("../img/fondo.jpg");
 }

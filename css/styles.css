@@ -6,13 +6,33 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #df8a8a;
-  font-family: "Poppins", sans-serif;
+  background: rgba(86, 83, 246, 0.6);
+  font-family: "Caveat", cursive;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   border: 1px solid #252525;
+  color: #fff;
+}
+
+.categoria label {
+  font-size: 25px;
+}
+
+.barra {
+  height: 60px;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 #productos {
@@ -35,19 +55,28 @@
       -ms-flex-align: center;
           align-items: center;
   border: solid #f0f0f0 1px;
+  background-color: rgba(86, 83, 246, 0.3);
   border-radius: 5px;
   width: 250px;
-  height: 600px;
+  height: 650px;
   margin-bottom: 20px;
   margin-right: 20px;
 }
 
-#productos .vista p {
+#productos .vista h2 {
+  font-size: 38px;
   color: black;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Caveat", cursive;
+}
+
+#productos .vista p {
+  /*font-weight: bold;*/
+  color: black;
+  font-family: "Caveat", cursive;
   display: inline-block;
   line-height: 1.6;
   text-align: center;
+  font-size: 25px;
 }
 
 #productos .vista select {
@@ -80,5 +109,26 @@
   width: 100%;
   display: block;
   margin: 0 auto;
+}
+
+.elementoCarrito {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.elementoCarrito p {
+  padding: 5px;
+}
+
+body {
+  background-image: url("../img/fondo.jpg");
 }
 /*# sourceMappingURL=styles.css.map */
