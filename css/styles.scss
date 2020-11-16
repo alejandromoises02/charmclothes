@@ -31,7 +31,21 @@ $Caveat: 'Caveat', cursive;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    li{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        p{
+            font-family: $Caveat;
+            text-align: center;
+            font-size: 30px;
+        }
+    }
+    
+    
 }
+
 
 
 
@@ -51,7 +65,7 @@ $Caveat: 'Caveat', cursive;
         margin-bottom: 20px;;
         margin-right: 20px;
         h2{
-            font-size: 38px;
+            font-size: 35px;
             color: black;
             font-family: $Caveat;
         }

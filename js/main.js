@@ -1,6 +1,7 @@
 ////////////////////DECLARACION DE VARIABLES////////////////////
 let data =[];
 let carrito =[];
+let cntdcarrito=0;
 let cate;
 let rd = false;
 
@@ -47,6 +48,7 @@ function cantidad(id){
 
 
 
+
 ////////////////////RENDER PRODUCTOS POR CATEGORIA Y JASON(AJAX)////////////////////
 function callbackJSON(resp, state){
     borrarElemento("#productos div");
@@ -81,12 +83,23 @@ $('input[type=radio][name=cat]').on('change', function() {
     $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar categoria
   });
 
+  function navbar(){
+    $("body div nav ul").remove();
+    $("body div nav").append("<ul class='navbar-nav mr-auto barra'><li class='nav-item'><a class='nav-link ColorText' href='../index.html'><img src='img/logo.png' alt='charmclothes' class='img-fluid rounded-lg'></a></li><li class='nav-item'><p>"+cntdcarrito+"</p><button type='button'  class='btn' onclick=verCarrito()  data-toggle='modal' data-target='#modalCarrito'><img src='img/carrito.png' alt='carrito' class='img-fluid rounded-lg'></button></li></ul>");
+
+  }
+
 ////////////////////READY////////////////////
 
   $( () => {
     rd = true;
     $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar destacados
-  })
+    navbar();
+    })
+
+  
+
+  
 
 
 ////////////////////AGREGAR AL CARRITO////////////////////
@@ -95,6 +108,8 @@ function agregarCarrito(id){
     let color = $(".color"+id).val();
     let talla = $(".talla"+id).val();
     let cntd = parseInt($("#cntd"+id).val());
+    cntdcarrito = cntdcarrito + cntd;
+    console.log(cntdcarrito);
     let precio;
     let nombre;
     data.forEach(item => {
@@ -115,7 +130,7 @@ function agregarCarrito(id){
     if(!flag){
         carrito.push(nuevoElemento);//si el producto NO esta en el carrito, se agrega
     }
-        
+    navbar();   
 }
 
 ////////////////////VER AL CARRITO////////////////////
@@ -141,10 +156,13 @@ function eliminarProducto(id){
     let result = id.split("+");//Se trae los datos del elemento a borrar
     for(const item of carrito){//Eliminar elemento
         if(item.id==result[0]&&item.color==result[1]&&item.talla==result[2]){//se consulta si coincide con los datos del elemento a borrar
+            cntdcarrito = cntdcarrito - item.cntd;
+            console.log(cntdcarrito);
             let i = carrito.indexOf(item);
             carrito.splice(i,1);//Eliminar elemento
         }
     verCarrito();//Render carrito
+    navbar();
     }
 }
 

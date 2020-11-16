@@ -35,6 +35,25 @@
           justify-content: space-between;
 }
 
+.barra li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.barra li p {
+  font-family: "Caveat", cursive;
+  text-align: center;
+  font-size: 30px;
+}
+
 #productos {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,7 +83,7 @@
 }
 
 #productos .vista h2 {
-  font-size: 38px;
+  font-size: 35px;
   color: black;
   font-family: "Caveat", cursive;
 }
