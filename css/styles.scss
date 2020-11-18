@@ -132,6 +132,8 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
+        font-family: $Caveat;
+        font-size: 50px;
     }
     .facturaDatos{
         display: flex;
@@ -148,6 +150,7 @@ body{
             border: 1px solid $dark;
             color: $negro;
             margin: 20px;
+            padding: 20px;
         }
     }
 }
@@ -157,5 +160,7 @@ body{
     display: flex;
     flex-direction: column;
     background: rgba(86, 83, 246, 0.6);
+    border: 1px solid $dark;
+    margin: 20px;
     padding: 20px;
 }

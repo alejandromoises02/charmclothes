@@ -174,6 +174,8 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  font-family: "Caveat", cursive;
+  font-size: 50px;
 }
 
 .comprar .facturaDatos {
@@ -206,6 +208,7 @@ body {
   border: 1px solid #252525;
   color: #000;
   margin: 20px;
+  padding: 20px;
 }
 
 .datosCliente {
@@ -217,6 +220,8 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   background: rgba(86, 83, 246, 0.6);
+  border: 1px solid #252525;
+  margin: 20px;
   padding: 20px;
 }
 /*# sourceMappingURL=styles.css.map */

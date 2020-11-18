@@ -1,9 +1,52 @@
 ////////////////////DECLARACION DE VARIABLES////////////////////
 let data =[];
 let carrito =[];
+let compraConfirmada =[];
 let cntdcarrito=0;
 let cate;
 let rd = false;
+
+////////////////////OBJETOS////////////////////
+function listProductos(id, nombre, precio, categoria, color, talla, destacado){
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.categoria = categoria;
+    this.color = color;
+    this.talla = talla;
+    this.destacado = destacado;
+ 
+    this.getId = function(){
+        return this.id;
+     }
+     
+     this.getNombre = function(){
+       return this.nombre;
+    }
+
+    this.getPrecio = function(){
+        return this.precio;
+     }
+
+     this.getCategoria = function(){
+        return this.categoria;
+     }
+
+     this.getColor = function(){
+        return this.color;
+     }
+
+     this.getTalla = function(){
+        return this.talla;
+     }
+
+     this.getDestacado = function(){
+        return this.destacado;
+     }
+ 
+ }
+
+
 
 ////////////////////VISTAS////////////////////
 const index = `<!--CATEGORIA-->
@@ -157,25 +200,29 @@ function callbackJSON(resp, state){
     borrarElemento("#productos div");
     data =[];
     if(state === "success"){
-        for (const i of resp) data.push(i);//Se guarda en data todo el jason
+        let c=0;
+        for (const i of resp) {
+            data[c] = new listProductos(i.id, i.nombre, i.precio, i.categoria, i.Color, i.Talla, i.destacado)
+            c++;
+        }//data.push(i);//Se guarda en data todo el jason
         
         cate = $('input:radio[name=cat]:checked').val();//Se toma la categoria seleccionada
         data.forEach(item => {
-            if(rd == false && cate === item.categoria || rd && item.destacado){//Si el producto coincide en la categoria seleccionada se renderiza
+            if(rd == false && cate === item.getCategoria() || rd && item.getDestacado()){//Si el producto coincide en la categoria seleccionada se renderiza
                 crearTag("div", 'vista', "#productos");//Se crea un div para la tarjeta del producto
-                crearElemento("h2", item.nombre, ".vista:last-child");//nombre
-                agregarImagen(item.id);//imagen
-                crearElemento("h2", "$"+item.precio, ".vista:last-child");//precio
+                crearElemento("h2", item.getNombre(), ".vista:last-child");//nombre
+                agregarImagen(item.getId());//imagen
+                crearElemento("h2", "$"+item.getPrecio(), ".vista:last-child");//precio
                 crearTag("div", 'containerColor', ".vista:last-child");//se crea contenedor de area de seleccion de color
                 crearElemento("p", "Color", "div.vista:last-child div.containerColor");//texto color
-                crearTag("select", "form-control color"+item.id, "div.vista:last-child div.containerColor");//se crea un select para la seleccion de color
-                item.Color.forEach(element => {crearElementoSelect("option", element, ".vista:last-child select.color"+item.id)});//colores
+                crearTag("select", "form-control color"+item.getId(), "div.vista:last-child div.containerColor");//se crea un select para la seleccion de color
+                item.getColor().forEach(element => {crearElementoSelect("option", element, ".vista:last-child select.color"+item.getId())});//colores
                 crearTag("div", 'containerTalla', ".vista:last-child");//se crea contenedor de area de seleccion de talla
                 crearElemento("p", "Talla", "div.vista:last-child div.containerTalla");//texto talla
-                crearTag("select", "form-control talla"+item.id, "div.vista:last-child div.containerTalla");//se crea un select para la seleccion de talla
-                item.Talla.forEach(element => {crearElementoSelect("option", element, ".vista:last-child select.talla"+item.id)});//tallas
+                crearTag("select", "form-control talla"+item.getId(), "div.vista:last-child div.containerTalla");//se crea un select para la seleccion de talla
+                item.getTalla().forEach(element => {crearElementoSelect("option", element, ".vista:last-child select.talla"+item.getId())});//tallas
                 cantidad("cntd"+item.id);//Seleccion de cantidad
-                $(".vista:last-child").append("<button onclick=agregarCarrito('"+item.id+"') type='button' class='btn btn-warning' id="+item.id+"'>Agregar al Carrito</button>" ); //agregar al carrito 
+                $(".vista:last-child").append("<button onclick=agregarCarrito('"+item.getId()+"') type='button' class='btn btn-warning' id="+item.getId()+"'>Agregar al Carrito</button>" ); //agregar al carrito 
             }
         })
 }
@@ -214,6 +261,7 @@ function verIndex(){
 
 ////////////////////AGREGAR AL CARRITO////////////////////
 function agregarCarrito(id){
+    console.log(id);
     let nuevoElemento;
     let color = $(".color"+id).val();
     let talla = $(".talla"+id).val();
@@ -222,9 +270,9 @@ function agregarCarrito(id){
     let precio;
     let nombre;
     data.forEach(item => {
-        if(item.id == id) {
-            precio = item.precio;
-            nombre = item.nombre
+        if(item.getId() == id) {
+            precio = item.getPrecio();
+            nombre = item.getNombre()
         }
     })//tomamos los datos de la tarjeta del producto
     nuevoElemento = {id,nombre,precio,color,talla,cntd};//Se crea una variable con los datos para incluir en el carrito
@@ -283,6 +331,10 @@ function eliminarProducto(id){
 }
 
 ////////////////////CERRAR COMPRA////////////////////
+function mostrarVenta(){
+    renderCarrito("#factura");
+}
+
 
 function confirmar(){
     let nombre = $("#firstName").val();
@@ -293,12 +345,16 @@ function confirmar(){
     let postal = $("#postal").val();
 
     if(carrito.length == 0) alert("Aun no haz agregado productos a tu compra")
-    else(alert(nombre+" "+apellido+" Gracias por tu compra, en breve nos pondremos en contacto con vos, enviaremos tu pedido a "+direccion+" "+ciudad));
-    
-}
-
-function mostrarVenta(){
-    renderCarrito("#factura");
+    else{
+        compraConfirmada = carrito;
+        carrito = [];
+        console.log(carrito);
+        console.log(compraConfirmada);
+        cntdcarrito = 0;
+        renderCarrito("#factura");
+        navbar();
+        alert(nombre+" "+apellido+" Gracias por tu compra, en breve nos pondremos en contacto con vos, enviaremos tu pedido a "+direccion+" "+ciudad);
+    }
 }
 
 function concretar(){
