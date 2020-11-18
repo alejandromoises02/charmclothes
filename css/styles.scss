@@ -16,7 +16,6 @@ $Caveat: 'Caveat', cursive;
     flex-direction: column;
     background: rgba(86, 83, 246, 0.6);
     font-family: $Caveat; 
-    display: flex;
     align-items: center;
     border: 1px solid $dark;
     color: $blanco;
@@ -123,4 +122,40 @@ $Caveat: 'Caveat', cursive;
 
 body{
     background-image: url("../img/fondo.jpg");
+}
+
+.comprar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .facturaDatos{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p{
+            font-size: 25px;
+        }
+        #factura{
+            display: flex;
+            flex-direction: column;
+            background: rgba(228, 230, 135, 0.6);
+            font-family: $Caveat; 
+            border: 1px solid $dark;
+            color: $negro;
+            margin: 20px;
+        }
+    }
+}
+
+
+.datosCliente{
+    display: flex;
+    flex-direction: column;
+    background: rgba(86, 83, 246, 0.6);
+    padding: 20px;
 }

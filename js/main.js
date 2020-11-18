@@ -5,6 +5,109 @@ let cntdcarrito=0;
 let cate;
 let rd = false;
 
+////////////////////VISTAS////////////////////
+const index = `<!--CATEGORIA-->
+<div class='col-3'>
+    <div class='categoria'>
+        <h2>Categorias:</h2>
+        <form>
+            <div>
+                <input type='radio' id='jeans' onchange=cambiarCategoria() name='cat' value='Jeans'>
+                <label for='Jeans'>Jeans</label>
+            </div>
+            <div>
+                <input type='radio' id='tops' onchange=cambiarCategoria() name='cat' value='Tops'>
+                <label for='Tops'>Tops</label>
+            </div>
+            <div>
+                <input type='radio' id='camperas' onchange=cambiarCategoria() name='cat' value='Camperas'>
+                <label for='Camperas'>Camperas</label>
+            </div>
+            <div>
+                <input type='radio' id='camisas' onchange=cambiarCategoria() name='cat' value='Camisas'>
+                <label for='Camisas'>Camisas</label>
+            </div>
+            <div>
+                <input type='radio' id='remeras' onchange=cambiarCategoria() name='cat' value='Remeras'>
+                <label for='Remeras'>Remeras</label>
+            </div>
+            <div>
+                <input type='radio' id='joggins' onchange=cambiarCategoria() name='cat' value='Joggins'>
+                <label for='Joggins'>Joggins</label>
+            </div>
+            <div>
+                <input type='radio' id='blusas' onchange=cambiarCategoria() name='cat' value='Blusas'>
+                <label for='Blusas'>Blusas</label>
+            </div>
+            <div>
+                <input type='radio' id='sweaters' onchange=cambiarCategoria() name='cat' value='Sweaters'>
+                <label for='Sweaters'>Sweaters</label>
+            </div>
+        </form>
+    </div>
+</div>
+<!--FIN CATEGORIA-->
+<!--PRODUCTOS-->
+<div class ='col-9' id='productos'>
+</div>
+<!--FIN PRODUCTOS-->
+`
+const comprar =`
+<div class="comprar col-12">
+<div class="col-12 align-self-center">
+<h1>Completa tu compra</h1>
+</div>
+<div class="facturaDatos">
+<div id="factura" class="col-6"></div>
+<div id="datos" class="col-6">
+
+<form class="datosCliente">
+
+            
+                <div class="form-row">
+                  <div class="col">
+                    <label for="firstName">Nombre</label>
+                    <input type="text" class="form-control" id= "firstName" placeholder="Nombre">
+                  </div>
+                  <div class="col">
+                    <label for="lasttName">Apellido</label>
+                    <input type="text" class="form-control" id= "lastName" placeholder="Apellido">
+                  </div>
+                </div>
+              
+
+
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Direccion</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="Calle, numero, Edificio, Departamento">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="inputCity">Ciudad</label>
+                <input type="text" class="form-control" id="ciudad" placeholder="Indique CABA o GBA">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputZip">Codigo Postal</label>
+                <input type="text" class="form-control" id="postal" placeholder="Codigo Postal">
+              </div>
+            </div>
+            <div class="form-group col-md-12"></div>
+            <button onclick=confirmar() type="button" class="btn btn-success">Confirmar Compra</button>
+            </div>
+          </form>
+
+</div>
+</div>
+</div>
+`
+
+
 ////////////////////DECLARACION DE FUNCIONES GENERICAS////////////////////
 function borrarElemento(elemento){
     let borrarElemento = $(elemento);
@@ -78,26 +181,33 @@ function callbackJSON(resp, state){
 }
 }
 
-$('input[type=radio][name=cat]').on('change', function() {
+//$("input[type=radio][name=cat]").on('change', function() {
+    function cambiarCategoria() {
     rd = false;
     $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar categoria
-  });
+    }
+    ////});
+
+  ////////////////////READY////////////////////
 
   function navbar(){
     $("body div nav ul").remove();
-    $("body div nav").append("<ul class='navbar-nav mr-auto barra'><li class='nav-item'><a class='nav-link ColorText' href='../index.html'><img src='img/logo.png' alt='charmclothes' class='img-fluid rounded-lg'></a></li><li class='nav-item'><p>"+cntdcarrito+"</p><button type='button'  class='btn' onclick=verCarrito()  data-toggle='modal' data-target='#modalCarrito'><img src='img/carrito.png' alt='carrito' class='img-fluid rounded-lg'></button></li></ul>");
-
+    $("body div nav").append("<ul class='navbar-nav mr-auto barra'><li class='nav-item'><a class='nav-link ColorText' href=#'><button type='button'  class='btn' onclick=verIndex()><img src='img/logo.png' alt='charmclothes' class='img-fluid rounded-lg'></button></a></li><li class='nav-item'><p>"+cntdcarrito+"</p><button type='button'  class='btn' onclick=verCarrito()  data-toggle='modal' data-target='#modalCarrito'><img src='img/carrito.png' alt='carrito' class='img-fluid rounded-lg'></button></li></ul>");
   }
 
-////////////////////READY////////////////////
+function verIndex(){
+    rd = true;
+    navbar();
+    $("#index_comprar div").remove();
+    $("#index_comprar").append(index);
+    $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar destacados
+}
 
   $( () => {
-    rd = true;
-    $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar destacados
-    navbar();
+    verIndex();
     })
 
-  
+   
 
   
 
@@ -109,7 +219,6 @@ function agregarCarrito(id){
     let talla = $(".talla"+id).val();
     let cntd = parseInt($("#cntd"+id).val());
     cntdcarrito = cntdcarrito + cntd;
-    console.log(cntdcarrito);
     let precio;
     let nombre;
     data.forEach(item => {
@@ -134,22 +243,30 @@ function agregarCarrito(id){
 }
 
 ////////////////////VER AL CARRITO////////////////////
-function verCarrito(){
+function renderCarrito(padre){
     let compra = 0;
-    $(".modal-body div").remove();//se remueve la data enterior
-    $(".modal-body").append("<div class='elementoCarrito row'><p class='col-2'>Cantidad</p><p class='col-6'>Descripcion</p><p class='col-2'>Precio Unitario</p><p class='col-2'>Precio Total</p></div>");//cabezal de carrito
+    $(padre+" div").remove();//se remueve la data enterior
+    $(padre).append("<div class='elementoCarrito row'><p class='col-2'>Cantidad</p><p class='col-6'>Descripcion</p><p class='col-2'>Precio Unitario</p><p class='col-2'>Precio Total</p></div>");//cabezal de carrito
     
     if(carrito.length == 0)
-        {$(".modal-body").append("<div class='elementoCarrito row justify-content-center'><p>No haz agregado productos a tu carrito</p></div>");//Si no hay productos en carrito
+        {$(padre).append("<div class='elementoCarrito row justify-content-center'><p>No haz agregado productos a tu carrito</p></div>");//Si no hay productos en carrito
     }   
     else {for(const item of carrito){
         total = item.precio*item.cntd;
-        $(".modal-body").append("<div id='"+item.id+"+"+item.color+"+"+item.talla+"' class='elementoCarrito row'><div class='elementoCarrito col-2'><button type='button' class='btn btn-danger' onclick=eliminarProducto('"+item.id+"+"+item.color+"+"+item.talla+"')>X</button><p class='col-2'>"+item.cntd+"</p></div><p class='col-6'>"+item.nombre+" Color "+item.color+" Talla "+item.talla+"</p><p class='col-2'>"+item.precio+"</p><p class='col-2'>"+total+"</p></div>");//productos en carrito
+        if(padre === ".modal-body") $(padre).append("<div id='"+item.id+"+"+item.color+"+"+item.talla+"' class='elementoCarrito row'><div class='elementoCarrito col-2'><button type='button' class='btn btn-danger' onclick=eliminarProducto('"+item.id+"+"+item.color+"+"+item.talla+"')>X</button><p class='col-2'>"+item.cntd+"</p></div><p class='col-6'>"+item.nombre+" Color "+item.color+" Talla "+item.talla+"</p><p class='col-2'>"+item.precio+"</p><p class='col-2'>"+total+"</p></div>");//productos en carrito
+        else $(padre).append("<div id='"+item.id+"+"+item.color+"+"+item.talla+"' class='elementoCarrito row'><div class='elementoCarrito col-2'><p class='col-2'>"+item.cntd+"</p></div><p class='col-6'>"+item.nombre+" Color "+item.color+" Talla "+item.talla+"</p><p class='col-2'>"+item.precio+"</p><p class='col-2'>"+total+"</p></div>");//productos en carrito
         compra = compra + total;
     }}
 
-    $(".modal-body").append("<div class='elementoCarrito row justify-content-end'><p class='col-2'>Total</p><p class='col-2'>"+compra+"</p></div>");//precio final
+    $(padre).append("<div class='elementoCarrito row justify-content-end'><p class='col-2'>Total</p><p class='col-2'>"+compra+"</p></div>");//precio final
+
+
 }
+
+function verCarrito(){
+    renderCarrito(".modal-body");
+    }
+
 
 ////////////////////ELIMINAR PRODUCTO DEL CARRITO////////////////////
 function eliminarProducto(id){
@@ -157,13 +274,37 @@ function eliminarProducto(id){
     for(const item of carrito){//Eliminar elemento
         if(item.id==result[0]&&item.color==result[1]&&item.talla==result[2]){//se consulta si coincide con los datos del elemento a borrar
             cntdcarrito = cntdcarrito - item.cntd;
-            console.log(cntdcarrito);
             let i = carrito.indexOf(item);
             carrito.splice(i,1);//Eliminar elemento
         }
-    verCarrito();//Render carrito
+        renderCarrito(".modal-body");//Render carrito
     navbar();
     }
+}
+
+////////////////////CERRAR COMPRA////////////////////
+
+function confirmar(){
+    let nombre = $("#firstName").val();
+    let apellido = $("#lastName").val();
+    let mail = $("#inputEmail4").val();
+    let direccion = $("#inputAddress").val();
+    let ciudad = $("#ciudad").val();
+    let postal = $("#postal").val();
+
+    if(carrito.length == 0) alert("Aun no haz agregado productos a tu compra")
+    else(alert(nombre+" "+apellido+" Gracias por tu compra, en breve nos pondremos en contacto con vos, enviaremos tu pedido a "+direccion+" "+ciudad));
+    
+}
+
+function mostrarVenta(){
+    renderCarrito("#factura");
+}
+
+function concretar(){
+    $("#index_comprar div").remove();
+    $("#index_comprar").append(comprar);
+    mostrarVenta();
 }
 
 
