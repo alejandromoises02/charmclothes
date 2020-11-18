@@ -5,6 +5,7 @@ let compraConfirmada =[];
 let cntdcarrito=0;
 let cate;
 let rd = false;
+////////////////////DECLARACION DE VARIABLES////////////////////
 
 ////////////////////OBJETOS////////////////////
 function listProductos(id, nombre, precio, categoria, color, talla, destacado){
@@ -45,8 +46,7 @@ function listProductos(id, nombre, precio, categoria, color, talla, destacado){
      }
  
  }
-
-
+////////////////////OBJETOS////////////////////
 
 ////////////////////VISTAS////////////////////
 const index = `<!--CATEGORIA-->
@@ -96,8 +96,8 @@ const index = `<!--CATEGORIA-->
 <!--FIN PRODUCTOS-->
 `
 const comprar =`
-<div class="comprar col-12">
-<div class="col-12 align-self-center">
+<div class="comprar container">
+<div class="align-self-center">
 <h1>Completa tu compra</h1>
 </div>
 <div class="facturaDatos">
@@ -149,7 +149,7 @@ const comprar =`
 </div>
 </div>
 `
-
+////////////////////VISTAS////////////////////
 
 ////////////////////DECLARACION DE FUNCIONES GENERICAS////////////////////
 function borrarElemento(elemento){
@@ -191,9 +191,7 @@ function cantidad(id){
  $(".vista:last-child").append(cantidad);
 }
 
-
-
-
+////////////////////DECLARACION DE FUNCIONES GENERICAS////////////////////
 
 ////////////////////RENDER PRODUCTOS POR CATEGORIA Y JASON(AJAX)////////////////////
 function callbackJSON(resp, state){
@@ -228,14 +226,13 @@ function callbackJSON(resp, state){
 }
 }
 
-//$("input[type=radio][name=cat]").on('change', function() {
     function cambiarCategoria() {
     rd = false;
     $.ajax({url:"../data/productsJson.json", datatype:"json", success: callbackJSON})//Se toman los datos del Json para mostrar categoria
     }
-    ////});
+////////////////////RENDER PRODUCTOS POR CATEGORIA Y JASON(AJAX)////////////////////
 
-  ////////////////////READY////////////////////
+////////////////////READY////////////////////
 
   function navbar(){
     $("body div nav ul").remove();
@@ -254,10 +251,7 @@ function verIndex(){
     verIndex();
     })
 
-   
-
-  
-
+////////////////////READY////////////////////   
 
 ////////////////////AGREGAR AL CARRITO////////////////////
 function agregarCarrito(id){
@@ -290,6 +284,8 @@ function agregarCarrito(id){
     navbar();   
 }
 
+////////////////////AGREGAR AL CARRITO////////////////////
+
 ////////////////////VER AL CARRITO////////////////////
 function renderCarrito(padre){
     let compra = 0;
@@ -315,6 +311,7 @@ function verCarrito(){
     renderCarrito(".modal-body");
     }
 
+////////////////////VER AL CARRITO////////////////////
 
 ////////////////////ELIMINAR PRODUCTO DEL CARRITO////////////////////
 function eliminarProducto(id){
@@ -329,12 +326,12 @@ function eliminarProducto(id){
     navbar();
     }
 }
+////////////////////ELIMINAR PRODUCTO DEL CARRITO////////////////////
 
 ////////////////////CERRAR COMPRA////////////////////
 function mostrarVenta(){
     renderCarrito("#factura");
 }
-
 
 function confirmar(){
     let nombre = $("#firstName").val();
@@ -363,6 +360,7 @@ function concretar(){
     mostrarVenta();
 }
 
+////////////////////CERRAR COMPRA////////////////////
 
 
 
